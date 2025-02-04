@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Calculator from './pages/Calculator';
+
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
             <Route path="/" element={<Navigate to="/en" replace />} />
             
             {/* English route */}
-            <Route path="/en" element={<Calculator />} />
+            {/* <Route path="/en" element={<Component />} /> */}
             
             {/* Welsh route */}
-            <Route path="/cy" element={<Calculator />} />
+            {/* <Route path="/cy" element={<Component />} /> */}
           </Routes>
         </main>
       </div>
