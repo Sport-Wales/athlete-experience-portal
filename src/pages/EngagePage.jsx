@@ -1,7 +1,6 @@
 // src/pages/EngagePage.jsx
 import React, { useState } from 'react';
-import PersonalInfo from '../components/engage/PersonalInfo';
-import PrivacyConsent from '../components/engage/PrivacyConsent';
+import AthleteInfoForm from '../components/engage/AthleteInfoForm';
 import StorySubmission from '../components/engage/StorySubmission';
 import FinalSteps from '../components/engage/FinalSteps';
 import { useAthleteContext } from '../context/AthleteContext';
@@ -13,10 +12,9 @@ export default function EngagePage() {
   const navigate = useNavigate();
 
   const steps = [
-    { id: 1, title: 'About You' },
-    { id: 2, title: 'Privacy & Consent' },
-    { id: 3, title: 'Share Your Story' },
-    { id: 4, title: 'Final Steps' }
+    { id: 1, title: 'About You & Privacy' },
+    { id: 2, title: 'Share Your Story' },
+    { id: 3, title: 'Final Steps' }
   ];
 
   const renderStep = () => {
@@ -26,13 +24,11 @@ export default function EngagePage() {
       }
     switch(currentStep) {
       case 1:
-        return <PersonalInfo onNext={() => setCurrentStep(2)} />;
+        return <AthleteInfoForm onNext={() => setCurrentStep(2)} />;
       case 2:
-        return <PrivacyConsent onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />;
+        return <StorySubmission onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />;
       case 3:
-        return <StorySubmission onNext={() => setCurrentStep(4)} onBack={() => setCurrentStep(2)} />;
-      case 4:
-        return <FinalSteps onSubmit={() => navigate('/en/exit')} onBack={() => setCurrentStep(3)} />;
+        return <FinalSteps onSubmit={() => navigate('/en/exit')} onBack={() => setCurrentStep(2)} />;
       default:
         return null;
     }
@@ -74,3 +70,5 @@ export default function EngagePage() {
     </div>
   );
 }
+
+
