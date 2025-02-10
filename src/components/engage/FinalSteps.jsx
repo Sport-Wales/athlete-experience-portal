@@ -143,7 +143,7 @@ export default function FinalSteps({ onSubmit, onBack }) {
               />
               <div className="flex-1">
                 <span className="font-medium text-[--color-sw-red]">
-                  Mark as Sensitive Content
+                  Sensitive Content
                 </span>
                 <p className="text-sm text-gray-700 mt-1">
                   Content that requires careful handling or raises safeguarding concerns
