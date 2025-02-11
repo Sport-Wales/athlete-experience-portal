@@ -30,7 +30,7 @@ export default function EnterPage() {
 
 
   return (
-    <div className="mt-80 space-y-2 items-center justify-center">
+    <div className="mt-44 space-y-2 items-center justify-center">
         {/* Welcome Header */}
         <header className="text-center ">
           <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">

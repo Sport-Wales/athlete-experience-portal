@@ -45,25 +45,72 @@ export default App;
 
 --- Start of pages/EnterPage.jsx ---
 // src/pages/EnterPage.jsx
-import React from 'react';
-import AccessCodeInput from '../components/shared/AccessCodeInput';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+
 
 export default function EnterPage() {
-  return (
-    <div className="space-y-8">
-      {/* Welcome Header */}
-      <header className="text-center mb-12">
-        <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
-          Welcome to the Athlete's Voice
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          A space for all athletes to share their experiences and make a positive impact
-          on Welsh sport.
-        </p>
-      </header>
 
-      {/* Access Code Section */}
-      <AccessCodeInput />
+  const [code, setCode] = useState('');
+      const [error, setError] = useState('');
+      const [isLoading, setIsLoading] = useState(false);
+      const navigate = useNavigate();
+    
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        setError('');
+  
+        // For prototype, accept any code
+        if (code.trim().length > 0) {
+          // Simulate a brief loading state
+          await new Promise(resolve => setTimeout(resolve, 600));
+          navigate('/en/panel');
+        } else {
+          setError('Please enter the access code provided to you');
+        }
+        setIsLoading(false);
+      };
+
+
+
+  return (
+    <div className="mt-80 space-y-2 items-center justify-center">
+        {/* Welcome Header */}
+        <header className="text-center ">
+          <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
+            Welcome to the Athlete's Voice
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            A space for all athletes to share their experiences and make a positive impact
+            on Welsh sport.
+          </p>
+        </header>
+
+        {/* Access Code Section */}
+        <div className="sw-card max-w-md mx-auto">
+        <form onSubmit={handleSubmit}>
+          <label className="sw-label block mb-2">
+            Enter your access code
+          </label>
+          <input
+            type="text"
+            className="sw-input w-full mb-4"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="Enter access code"
+          />
+          {error && (
+            <div className="sw-notice text-[--color-sw-red] mb-4">
+              {error}
+            </div>
+          )}
+          <button type="submit" className="sw-button sw-button-primary w-full">
+            Continue
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
@@ -178,7 +225,7 @@ export default function LandingPage() {
       </section>
 
        {/* Hero Section - Redesigned with better spacing */}
-    <section className="py-8  mx-auto bg-white from-white to-gray-50">
+    <section className="py-12  mx-auto bg-white from-white to-gray-50">
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-extrabold text-[--color-sw-blue] mb-4">
           Your Voice Matters
@@ -199,7 +246,7 @@ export default function LandingPage() {
 
           {/* Expanding background on hover */}
           <div
-            className="absolute inset-0 bg-[--color-sw-green] 
+            className="absolute inset-0 bg-[--color-sw-red] 
                       transition-all duration-300 ease-out origin-center cursor-pointer
                       scale-0 group-hover:scale-100 z-10 rounded-xl w-[50%] mr-auto ml-auto">
           </div>
@@ -349,61 +396,108 @@ export default function ExitPage() {
 
   return (
     <div className="max-w-2xl mx-auto text-center">
-      {/* Success Animation */}
-      <div className="mb-8">
-        <div className="w-24 h-24 rounded-full bg-[--color-sw-green] mx-auto flex items-center justify-center">
-          <svg 
-            className="w-12 h-12 text-white" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
+          {/* Success Animation */}
+          <div className="mb-8">
+            <div className="w-24 h-24 rounded-full bg-[--color-sw-green] mx-auto flex items-center justify-center">
+              <svg 
+                className="w-12 h-12 text-white" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  strokeWidth={2} 
+                  d="M5 13l4 4L19 7" 
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Confirmation Message */}
+          <div className="sw-card">
+            <h1 className="sw-heading-primary text-[--color-sw-green] mb-4">
+              Thank You for Sharing Your Story!
+            </h1>
+            
+            <p className="text-lg mb-6">
+              Your voice matters and will help shape the future of Welsh sport.
+            </p>
+
+            {/* Next Steps */}
+            <div className="sw-notice mb-6">
+              <h2 className="font-bold mb-2">What happens next?</h2>
+              <ul className="text-left space-y-2">
+                <li>• Your story will be reviewed by the Athlete Panel within 5 working days</li>
+                {athleteData.needsContact && (
+                  <li>• A panel member will contact you to discuss your story further</li>
+                )}
+                <li>• Your insights will be used to improve athlete experiences across Wales</li>
+              </ul>
+            </div>
+
+          {/* Support Resources */}
+          <div className="text-left mb-8">
+      <h2 className="font-bold text-lg text-[--color-sw-blue] mb-3">Support Resources</h2>
+      
+      <div className="space-y-3">
+        <div>
+            <a 
+            href="https://thecpsu.org.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[--color-sw-blue] hover:text-[--color-sw-blue] hover:underline"
           >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2} 
-              d="M5 13l4 4L19 7" 
-            />
-          </svg>
+            Support for Athletes - Sport Wales
+          </a>
+          <p className="text-sm text-gray-600">If you want to be an athlete there are lots of ways you can get support.</p>
         </div>
+
+        <div>
+          <a 
+            href="https://thecpsu.org.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[--color-sw-blue] hover:text-[--color-sw-blue] hover:underline"
+          >
+            British Elite Athletes Association
+          </a>
+          <p className="text-sm text-gray-600">Support, representation and community for Olympic and Paralympic athletes.</p>
+        </div>
+
+        <div>
+          <a 
+            href="https://thecpsu.org.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-medium text-[--color-sw-blue] hover:text-[--color-sw-blue] hover:underline"
+          >
+            NSPCC Child Protection in Sport Unit
+          </a>
+          <p className="text-sm text-gray-600">The NSPCC's Child Protection in Sport Unit works to safeguard children in sport.</p>
+        </div>
+
+        <p className="text-sm text-gray-600 mt-4">
+          For safeguarding concerns, please contact your sport's National Governing Body (NGB) Safeguarding Lead.
+        </p>
       </div>
 
-      {/* Confirmation Message */}
-      <div className="sw-card">
-        <h1 className="sw-heading-primary text-[--color-sw-green] mb-4">
-          Thank You for Sharing Your Story!
-        </h1>
-        
-        <p className="text-lg mb-6">
-          Your voice matters and will help shape the future of Welsh sport.
-        </p>
 
-        {/* Next Steps */}
-        <div className="sw-notice mb-6">
-          <h2 className="font-bold mb-2">What happens next?</h2>
-          <ul className="text-left space-y-2">
-            <li>• Your story will be reviewed by the Athlete Panel within 5 working days</li>
-            {athleteData.needsContact && (
-              <li>• A panel member will contact you to discuss your story further</li>
-            )}
-            <li>• Your insights will be used to improve athlete experiences across Wales</li>
-          </ul>
-        </div>
+            {/* Safeguarding Notice */}
+            <div className=" mt-8 ">
+              <h3 className="font-bold text-[--color-sw-blue] mb-2">
+                Safeguarding Support
+              </h3>
+              <p className="text-gray-700">
+                If you have any safeguarding concerns, please contact your sport's National Governing Body (NGB) 
+                Safeguarding Lead. They are trained to provide appropriate support and guidance in relation to safeguarding in sport.
+              </p>
+            </div>
 
-        {/* Support Resources */}
-        <div className="text-left mb-8">
-          <h2 className="font-bold mb-2">Support Resources</h2>
-          <p>
-            If you need immediate support or would like to discuss any concerns,
-            please contact our athlete support team:
-          </p>
-          support for athletes, resouces  to be placed here instead 
 
-          Contact on safeguarding lead for your ngb   
-          <div className="mt-2">
-            <div>Email: support@sportwales.org.uk</div>
-            <div>Phone: 0300 300 3111</div>
           </div>
+
         </div>
 
         {/* Return Link */}
@@ -414,58 +508,11 @@ export default function ExitPage() {
           Return to Homepage
         </Link>
       </div>
-    </div>
   );
 }
 --- End of pages/ExitPage.jsx ---
 
---- Start of shared/AccessCodeInput.jsx ---
-// src/components/shared/AccessCodeInput.jsx
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-export default function AccessCodeInput() {
-    const [code, setCode] = useState('');
-    const [error, setError] = useState('');
-    const navigate = useNavigate();
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // For prototype, accept any code
-      if (code.trim().length > 0) {
-        navigate('/en/panel'); // Changed from '/en/engage' to '/en/panel'
-      } else {
-        setError('Please enter the access code provided to you');
-      }
-    };
-
-  return (
-    <div className="sw-card max-w-md mx-auto">
-      <form onSubmit={handleSubmit}>
-        <label className="sw-label block mb-2">
-          Enter your access code
-        </label>
-        <input
-          type="text"
-          className="sw-input w-full mb-4"
-          value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter access code"
-        />
-        {error && (
-          <div className="sw-notice text-[--color-sw-red] mb-4">
-            {error}
-          </div>
-        )}
-        <button type="submit" className="sw-button sw-button-primary w-full">
-          Continue
-        </button>
-      </form>
-    </div>
-  );
-}
---- End of shared/AccessCodeInput.jsx ---
-
+File not found: shared/AccessCodeInput.jsx
 --- Start of AthleteInfoForm.jsx ---
 // src/components/engage/AthleteInfoForm.jsx
 
@@ -914,6 +961,12 @@ export default function StorySubmission({ onNext, onBack }) {
         {/* Written Story - Guided Format */}
         {submissionType === 'written-guided' && (
           <div className="space-y-6">
+            <div className="sw-card bg-gray-50">
+              <h3 className="font-bold mb-2">Guide conversation</h3>
+              <p className="text-gray-600 mb-4">
+                We've provided some questions to help you structure your story. Feel free to answer any or all of them, each question is optional.
+              </p>
+            </div>
             {guidedQuestions.map(question => (
               <div key={question.id} className="space-y-2">
                 <label className="sw-label block">
