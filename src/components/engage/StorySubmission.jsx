@@ -191,6 +191,12 @@ export default function StorySubmission({ onNext, onBack }) {
         {/* Written Story - Guided Format */}
         {submissionType === 'written-guided' && (
           <div className="space-y-6">
+            <div className="sw-card bg-gray-50">
+              <h3 className="font-bold mb-2">Guide conversation</h3>
+              <p className="text-gray-600 mb-4">
+                We've provided some questions to help you structure your story. Feel free to answer any or all of them, each question is optional.
+              </p>
+            </div>
             {guidedQuestions.map(question => (
               <div key={question.id} className="space-y-2">
                 <label className="sw-label block">

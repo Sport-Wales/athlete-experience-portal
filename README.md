@@ -1,234 +1,189 @@
-# Sport Wales Crowdfunder Calculator
+# Sport Wales Athlete's Voice Platform
 
-A React-based calculator tool helping community sports organisations determine potential match funding from Sport Wales. Built with Vite, React, and Tailwind CSS.
+A React-based platform built on the Sport Wales Project Template (SWPT) that enables athletes to share their experiences and stories securely. The platform facilitates anonymous feedback and story sharing to help improve Welsh sport.
 
 ## Overview
 
-This calculator helps sports clubs and organisations in Wales:
-- Calculate potential match funding from Sport Wales
-- Determine funding percentages based on location (WIMD data)
-- Factor in support for priority groups
-- Compute total project values and required fundraising amounts
+The Athlete's Voice Platform transforms Sport Wales' athlete feedback process into a secure, accessible digital platform. It enables:
+- Access code-based authentication
+- Multiple story submission formats (written, voice, video)
+- Anonymous sharing options
+- Guided and free-form story submissions
+- Safeguarding awareness and compliance
+- Bilingual accessibility (English/Welsh)
+- Progress tracking and story review
 
 ## Key Features
 
-- Two calculation modes:
-  - Total project cost calculation
-  - Target fundraising amount calculation
-- WIMD (Welsh Index of Multiple Deprivation) integration
-- Priority group selection
-- Real-time calculations
-- Responsive design
-- Sport Wales brand compliant
+### Authentication & Access
+- Secure access code system
+- Multiple entry points (direct/panel member referral)
+- Session-based progress saving
+- Dynamic routing based on submission stage
 
+### Story Submission Options
+- Written submissions:
+  - Free-form journal style
+  - Guided question format
+- Media submissions:
+  - Voice recordings
+  - Video messages
+- Privacy controls:
+  - Anonymous submission option
+  - Contact preferences
+  - Sensitive content marking
+
+## User Journey Flow
+
+### 1. Entry & Authentication
+- Welcome page with platform overview
+- Access code verification
+- Privacy and consent information
+
+### 2. Story Sharing Process
+1. Personal Information (Optional)
+   - Sport selection
+   - Competition level
+   - Age range
+   - Privacy preferences
+
+2. Story Submission
+   - Multiple format options
+   - Content guidelines
+   - Safeguarding information
+   - Progress saving
+
+3. Final Review
+   - Content review
+   - Sharing preferences
+   - Submission confirmation
 
 ## Quick Start
 
 ### Prerequisites
-- Node.js installed on your machine
+- Node.js (v18 or higher)
 - npm (comes with Node.js)
 - Git for version control
 
 ### Setup Steps
 
-1. Create a new Vite project:
+1. Clone the repository:
 ```bash
-npm create vite@latest crowdfunder_cal -- --template react
-cd crowdfunder_cal
+git clone https://github.com/sportwales/athletes-voice.git
+cd athletes-voice
 ```
 
 2. Install dependencies:
 ```bash
-npm install react-router-dom @headlessui/react lucide-react @fortawesome/fontawesome-free
-npm install -D tailwindcss postcss autoprefixer
+npm install
 ```
 
-3. Initialise Tailwind CSS:
+3. Start development server:
 ```bash
-npx tailwindcss init -p
+npm run dev
 ```
 
 ## Project Structure
+
 ```
-crowdfunder_cal/
-├── public/              # Static assets that need to be served as-is
-│   └── favicon.svg
+athletes-voice/
 ├── src/
 │   ├── components/     
-│   │   ├── layout/     # Layout components (Header, Footer, etc.)
-│   │   └── ui/         # Reusable UI components
-│   ├── pages/          # Page components
-│   ├── assets/         # Images, icons, etc.
-│   ├── data/          # JSON data files
-│   ├── styles/        # CSS files
-│   │   └── index.css  # Global styles
-│   ├── utils/         # Helper functions
-│   ├── App.jsx        # Main App component
-│   ├── main.jsx       # Entry point
-│
-├── index.html          # Entry HTML file
-├── package.json        # Project dependencies and scripts
-├── vite.config.js      # Vite configuration
-├── postcss.config.js   # PostCSS configuration
-├── tailwind.config.js  # Tailwind configuration
-└── README.md          # Project documentation
+│   │   ├── engage/            # Story submission components
+│   │   ├── shared/            # Shared components
+│   │   └── ui/                # UI components
+│   ├── context/              # AthleteContext
+│   ├── pages/                # Main page components
+│   │   ├── EnterPage.jsx     # Welcome & access
+│   │   ├── LandingPage.jsx   # Information & panel
+│   │   ├── EngagePage.jsx    # Story submission
+│   │   └── ExitPage.jsx      # Confirmation
+│   └── styles/               # Global styles
 ```
 
+## Key Components
 
-### Key Files
-```
-src/
-├── components/
-│   └── calculator/
-│       └── CrowdfunderCalculator.jsx    # Main calculator component
-├── utils/
-│   ├── wimd.js                         # WIMD data utilities
-│   └── convertWIMDData.js              # WIMD data conversion
-├── data/
-│   ├── PostcodesCSV.csv                # Raw WIMD data
-│   └── wimd_data.json                  # Processed WIMD data
-└── styles/
-    └── index.css                       # Global styles including SWBG
-```
+### 1. Story Submission Components
+- `AthleteInfoForm`: Personal information collection
+- `StorySubmission`: Multi-format story input
+- `FinalSteps`: Review and submission
 
+### 2. Context Management
+`AthleteContext` handles:
+- Form data management
+- Progress tracking
+- Submission state
+- Privacy preferences
 
-## Core Components
+### 3. Shared Components
+- `AccessCodeInput`: Entry verification
+- `Layout`: Page structure
+- `ErrorBoundary`: Error handling
 
-### Set up WIMD data:
-   - Place PostcodesCSV.csv in src/data/
-   - Run conversion script:
-   - This will convert the PostcodesCSV.csv file into a JSON file in: 
-   `src/data/wimd_data.json`
+## Development Notes
 
-```bash
-npm run convert-wimd
-```
+### Environment Setup
+- Uses SWPT base configuration
+- Follows Sport Wales Brand Guidelines
+- Implements bilingual support
+- Accessibility compliance
 
-### 1. CrowdfunderCalculator
-Main calculator component (`src/components/calculator/CrowdfunderCalculator.jsx`)
-- Handles all calculation logic
-- Manages form state
-- Processes WIMD data
-- Validates inputs
-- Displays results
-
-### 2. WIMD Integration
-WIMD utilities (`src/utils/wimd.js`)
-- Postcode validation
-- WIMD rank lookup
-- Area deprivation checks
-
-## Configuration Files
-
-### vite.config.js
-```javascript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  server: {
-    port: 3000
-  }
-})
-```
-
-### tailwind.config.js
-```javascript
-/** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-}
-```
-
-### package.json Scripts
-```json
-{
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  }
-}
-```
-
-### Add to index.html
-```html
-<link 
-  rel="stylesheet" 
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
-/>
-```
-
-### Add to src/index.css
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
+### Styling
+- Utilises SWPT styling system
+- Custom components follow brand guidelines
+- Responsive design for all devices
+- Accessible color schemes
 
 ## Available Scripts
 
 ```bash
-# Start development server
+# Development server
 npm run dev
 
-# Build for production
+# Production build
 npm run build
 
-# Preview production build locally
+# Preview production
 npm run preview
 ```
 
-
 ## Deployment
 
-### Deploy to Netlify:
+### Production Deployment:
 
-1. Update netlify.toml for Vite:
-
-```toml
-[build]
-  command = "npm run build"
-  publish = "dist"    # Vite uses 'dist' instead of 'build'
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+1. Build the project:
+```bash
+npm run build
 ```
 
 2. Deploy options:
-   - Connect your GitHub repository to Netlify for automatic deployments
-   - Or use Netlify CLI:
-```bash
-npm install -g netlify-cli
-netlify deploy
-```
+   - Use existing SWPT deployment pipeline
+   - Manual deployment to preferred hosting
+   - Netlify/Vercel supported
 
-## Features
-- Vite for faster development and builds
+## Additional Features
+- Built on SWPT foundation
 - React Router for navigation
-- Tailwind CSS for styling
-- Font Awesome icons
-- HeadlessUI components
-- Production-ready configuration
-- Netlify deployment setup
-
-## License
-This project is licensed under the MIT License.
-
-## Support
-For support, email [your-email] or raise an issue in the repository.
+- Tailwind CSS styling
+- Form state management
+- Bilingual support (English/Welsh)
+- Accessibility compliance
+- Error boundary implementation
+- Progressive form saving
 
 ## Important Notes
-- Vite uses `dist` instead of `build` for production builds
-- Use `npm run dev` for development (not `npm start`)
-- Environment variables in Vite must be prefixed with `VITE_`
+- Always use SWPT style guidelines
+- Test bilingual content thoroughly
+- Ensure safeguarding compliance
+- Follow data protection guidelines
+- Regular security updates
+- Maintain accessibility standards
+
+## Support
+For technical support, contact the Sport Wales development team at [support-email].
+
+## Security
+Report security concerns to [security-email] or through the appropriate Sport Wales channels.
+
+## License
+This project is proprietary to Sport Wales. All rights reserved.

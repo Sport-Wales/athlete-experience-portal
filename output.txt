@@ -1,0 +1,1260 @@
+
+--- Start of src/App.jsx ---
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Layout  from './components/Layout';
+import EnterPage from './pages/EnterPage';
+import EngagePage from './pages/EngagePage';
+import ExitPage from './pages/ExitPage';
+import LandingPage from './pages/LandingPage';
+import {AthleteProvider} from './context/AthleteContext'
+
+function App() {
+  return (
+    <AthleteProvider>
+   <Router>
+      <div className="min-h-screen bg-white">
+        <Layout>
+        <main className="container mx-auto px-2 py-4 bg-white">
+          <Routes>
+          <Route path="/" element={<Navigate to="/en/enter" replace />} />
+            
+            {/* English routes */}
+            <Route path="/en/enter" element={<EnterPage />} />
+            <Route path="/en/panel" element={<LandingPage />} />
+            <Route path="/en/engage" element={<EngagePage />} />
+            <Route path="/en/exit" element={<ExitPage />} />
+            
+            {/* Welsh routes */}
+            <Route path="/cy/enter" element={<EnterPage />} />
+            <Route path="/cy/panel" element={<LandingPage />} />
+            <Route path="/cy/engage" element={<EngagePage />} />
+            <Route path="/cy/exit" element={<ExitPage />} />
+          </Routes>
+        </main>
+        </Layout>
+      </div>
+    </Router>
+    </AthleteProvider>
+  );
+}
+
+export default App;
+--- End of src/App.jsx ---
+
+--- Start of pages/EnterPage.jsx ---
+// src/pages/EnterPage.jsx
+import React from 'react';
+import AccessCodeInput from '../components/shared/AccessCodeInput';
+
+export default function EnterPage() {
+  return (
+    <div className="space-y-8">
+      {/* Welcome Header */}
+      <header className="text-center mb-12">
+        <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
+          Welcome to the Athlete's Voice
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          A space for all athletes to share their experiences and make a positive impact
+          on Welsh sport.
+        </p>
+      </header>
+
+      {/* Access Code Section */}
+      <AccessCodeInput />
+    </div>
+  );
+}
+--- End of pages/EnterPage.jsx ---
+
+--- Start of pages/LandingPage.jsx ---
+// src/pages/LandingPage.jsx
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const panelMembers = [
+  {
+    id: 1,
+    name: "Sarah Jones",
+    sport: "Swimming",
+    achievement: "Former Commonwealth Athlete",
+    quote: "I'm passionate about helping athletes have their voices heard.",
+    image: "/api/placeholder/200/200"
+  },
+  {
+    id: 2,
+    name: "David Williams",
+    sport: "Athletics",
+    achievement: "National Champion",
+    quote: "Every athlete's journey matters. Share yours with us.",
+    image: "/api/placeholder/200/200"
+  },
+  {
+    id: 3,
+    name: "Emma Hughes",
+    sport: "Hockey",
+    achievement: "Olympic Team Member",
+    quote: "Together we can make Welsh sport even better.",
+    image: "/api/placeholder/200/200"
+  }
+];
+
+export default function LandingPage() {
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+
+      {/* How It Works Section - Horizontal layout */}
+      <section className="py-4 bg-sw-light-grey">
+        <div className="w-[90%] mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-[--color-sw-blue] mb-4">
+            How Story Sharing Works
+          </h2>
+          <div className="grid grid-cols-1 pt-4 md:grid-cols-3 gap-8 lg:gap-6 max-w-8xl mx-auto">
+            {[
+              {
+                title: "Share Your Experience",
+                description: "Tell us about your journey in Welsh sport - your achievements, challenges, and learnings."
+              },
+              {
+                title: "Make an Impact",
+                description: "Your insights help identify what's working well and what needs to change in Welsh sport."
+              },
+              {
+                title: "Create Positive Change",
+                description: "Together, we use these experiences to improve support and create better sporting environments."
+              }
+            ].map((step, index) => (
+              <div key={index} className="flex items-start space-x-4 ">
+                <div className="w-10 h-10 rounded-full bg-[--color-sw-green] text-white 
+                              flex items-center justify-center text-md shrink-0">
+                  {index + 1}
+                </div>
+                <div>
+                  <h3 className="text-md font-bold text-[--color-sw-blue] mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Impact Stories Section - Simplified */}
+      <section className="py-10 bg-white">
+        <div className="w-[90%] mx-auto">
+          <h2 className="text-2xl md:text-2xl font-bold text-center text-[--color-sw-blue] mb-2">
+            The Impact of Sharing
+          </h2>
+          <p className="text-lg text-[--color-sw-blue] text-center mb-8 pt-2 max-w-2xl mx-auto">
+                  Join other athletes in shaping the future of Welsh sport. Your experience
+                  matters and can make a real difference.
+                </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6 max-w-2xl mx-auto">
+            <div className="sw-card bg-[--color-sw-blue] text-white p-6 rounded-lg">
+              <h3 className="text-md text-center font-bold mb-3">
+                Make an Impact
+              </h3>
+              <p className="text-white/90">
+                Your insights help us understand what's working well and what needs to change in Welsh sport.
+              </p>
+            </div>
+            <div className="sw-card bg-[--color-sw-green] text-white p-6 rounded-lg">
+              <h3 className="text-md text-center font-bold mb-3">
+                Create Change
+              </h3>
+              <p className="text-white/90">
+                We use your feedback to improve athlete support and create better sporting environments across Wales.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+       {/* Hero Section - Redesigned with better spacing */}
+    <section className="py-8  mx-auto bg-white from-white to-gray-50">
+      <div className="text-center max-w-4xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-[--color-sw-blue] mb-4">
+          Your Voice Matters
+        </h1>
+        <p className="text-md md:text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+          Join the athlete panel in shaping the future of Welsh sport. Share your experiences,
+          challenges, and victories.
+        </p>
+        
+        {/* Enhanced CTA Container */}
+          <Link 
+            to="/en/engage"
+            
+          >
+        <div className="relative items-center justify-center py-6 my-4 group">
+          {/* Decorative skewed background */}
+          <div className="absolute inset-0 bg-[--color-sw-blue] z-0 cursor-pointer rounded-xl w-[50%] mr-auto ml-auto"></div>
+
+          {/* Expanding background on hover */}
+          <div
+            className="absolute inset-0 bg-[--color-sw-green] 
+                      transition-all duration-300 ease-out origin-center cursor-pointer
+                      scale-0 group-hover:scale-100 z-10 rounded-xl w-[50%] mr-auto ml-auto">
+          </div>
+
+          {/* Call to Action Link */}
+            <span className="relative z-20 inline-block text-lg font-bold
+                      text-white group-hover:text-white
+                      transition-transform duration-300 ease-out
+                      group-hover:scale-105 active:scale-95"> 
+            Share Your Story
+              
+              </span>
+        </div>
+          </Link>
+
+      </div>
+    </section>
+
+      {/* Panel Members Section - Better grid layout */}
+      <section className="pt-8 bg-white">
+        <div className="w-[86%] mx-auto">
+          <h2 className="text-2xl md:text-2xl font-bold text-center text-[--color-sw-blue] mb-6">
+            Meet Your Panel Members
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+            {panelMembers.map(member => (
+              <div key={member.id} className="sw-card shadow-lg transition-all p-4">
+                <div className="flex items-center space-x-4">
+                 
+                  <div>
+                    <h3 className="text-m font-bold text-[--color-sw-blue]">
+                      {member.name}
+                    </h3>
+                    <p className="text-[--color-sw-green] font-small">
+                      {member.sport}
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      {member.achievement}
+                    </p>
+                  </div>
+                </div>
+                <p className="italic text-gray-600 mt-3 text-sm">
+                  "{member.quote}"
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+    </div>
+  );
+}
+--- End of pages/LandingPage.jsx ---
+
+--- Start of pages/EngagePage.jsx ---
+// src/pages/EngagePage.jsx
+import React, { useState } from 'react';
+import AthleteInfoForm from '../components/engage/AthleteInfoForm';
+import StorySubmission from '../components/engage/StorySubmission';
+import FinalSteps from '../components/engage/FinalSteps';
+import { useAthleteContext } from '../context/AthleteContext';
+import { useNavigate } from 'react-router-dom';
+
+export default function EngagePage() {
+  const [currentStep, setCurrentStep] = useState(1);
+  const { athleteData } = useAthleteContext();
+  const navigate = useNavigate();
+
+  const steps = [
+    { id: 1, title: 'About You & Privacy' },
+    { id: 2, title: 'Share Your Story' },
+    { id: 3, title: 'Final Steps' }
+  ];
+
+  const renderStep = () => {
+    if (currentStep < 1 || currentStep > 4) {
+        navigate('/en/enter');
+        return null;
+      }
+    switch(currentStep) {
+      case 1:
+        return <AthleteInfoForm onNext={() => setCurrentStep(2)} />;
+      case 2:
+        return <StorySubmission onNext={() => setCurrentStep(3)} onBack={() => setCurrentStep(1)} />;
+      case 3:
+        return <FinalSteps onSubmit={() => navigate('/en/exit')} onBack={() => setCurrentStep(2)} />;
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      {/* Progress Steps */}
+      <div className="mb-8">
+        <div className="flex justify-between items-center">
+          {steps.map(step => (
+            <div 
+              key={step.id}
+              className={`flex-1 text-center ${
+                currentStep === step.id 
+                  ? 'text-[--color-sw-blue] font-bold' 
+                  : 'text-gray-400'
+              }`}
+            >
+              <div className={`
+                w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center
+                ${currentStep >= step.id 
+                  ? 'bg-[--color-sw-blue] text-white' 
+                  : 'bg-gray-200'
+                }
+              `}>
+                {step.id}
+              </div>
+              <span className="text-sm">{step.title}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="sw-card">
+        {renderStep()}
+      </div>
+    </div>
+  );
+}
+
+
+
+--- End of pages/EngagePage.jsx ---
+
+--- Start of pages/ExitPage.jsx ---
+// src/pages/ExitPage.jsx
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useAthleteContext } from '../context/AthleteContext';
+
+export default function ExitPage() {
+  const { athleteData } = useAthleteContext();
+
+  // Simulate email notification
+  useEffect(() => {
+    console.log('Story submitted:', athleteData);
+  }, []);
+
+  return (
+    <div className="max-w-2xl mx-auto text-center">
+      {/* Success Animation */}
+      <div className="mb-8">
+        <div className="w-24 h-24 rounded-full bg-[--color-sw-green] mx-auto flex items-center justify-center">
+          <svg 
+            className="w-12 h-12 text-white" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              strokeLinecap="round" 
+              strokeLinejoin="round" 
+              strokeWidth={2} 
+              d="M5 13l4 4L19 7" 
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* Confirmation Message */}
+      <div className="sw-card">
+        <h1 className="sw-heading-primary text-[--color-sw-green] mb-4">
+          Thank You for Sharing Your Story!
+        </h1>
+        
+        <p className="text-lg mb-6">
+          Your voice matters and will help shape the future of Welsh sport.
+        </p>
+
+        {/* Next Steps */}
+        <div className="sw-notice mb-6">
+          <h2 className="font-bold mb-2">What happens next?</h2>
+          <ul className="text-left space-y-2">
+            <li>• Your story will be reviewed by the Athlete Panel within 5 working days</li>
+            {athleteData.needsContact && (
+              <li>• A panel member will contact you to discuss your story further</li>
+            )}
+            <li>• Your insights will be used to improve athlete experiences across Wales</li>
+          </ul>
+        </div>
+
+        {/* Support Resources */}
+        <div className="text-left mb-8">
+          <h2 className="font-bold mb-2">Support Resources</h2>
+          <p>
+            If you need immediate support or would like to discuss any concerns,
+            please contact our athlete support team:
+          </p>
+          support for athletes, resouces  to be placed here instead 
+
+          Contact on safeguarding lead for your ngb   
+          <div className="mt-2">
+            <div>Email: support@sportwales.org.uk</div>
+            <div>Phone: 0300 300 3111</div>
+          </div>
+        </div>
+
+        {/* Return Link */}
+        <Link 
+          to="/en/enter" 
+          className="sw-button sw-button-primary inline-block"
+        >
+          Return to Homepage
+        </Link>
+      </div>
+    </div>
+  );
+}
+--- End of pages/ExitPage.jsx ---
+
+--- Start of shared/AccessCodeInput.jsx ---
+// src/components/shared/AccessCodeInput.jsx
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function AccessCodeInput() {
+    const [code, setCode] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // For prototype, accept any code
+      if (code.trim().length > 0) {
+        navigate('/en/panel'); // Changed from '/en/engage' to '/en/panel'
+      } else {
+        setError('Please enter the access code provided to you');
+      }
+    };
+
+  return (
+    <div className="sw-card max-w-md mx-auto">
+      <form onSubmit={handleSubmit}>
+        <label className="sw-label block mb-2">
+          Enter your access code
+        </label>
+        <input
+          type="text"
+          className="sw-input w-full mb-4"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          placeholder="Enter access code"
+        />
+        {error && (
+          <div className="sw-notice text-[--color-sw-red] mb-4">
+            {error}
+          </div>
+        )}
+        <button type="submit" className="sw-button sw-button-primary w-full">
+          Continue
+        </button>
+      </form>
+    </div>
+  );
+}
+--- End of shared/AccessCodeInput.jsx ---
+
+--- Start of AthleteInfoForm.jsx ---
+// src/components/engage/AthleteInfoForm.jsx
+
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAthleteContext } from '../../context/AthleteContext';
+
+const sports = [
+  'Athletics', 'Swimming', 'Cycling', 'Rugby', 'Football',
+  'Gymnastics', 'Hockey', 'Tennis', 'Basketball', 'Other'
+];
+
+const levels = [
+  'Development', 'National', 'International', 'Elite', 'Retired'
+];
+
+const ageRanges = [
+  'Under 18', '18-21', '22-25', '26-30', 'Over 30'
+];
+
+export default function AthleteInfoForm({ onNext }) {
+  const navigate = useNavigate();
+  const { athleteData, updateAthleteData } = useAthleteContext();
+  
+  const [formData, setFormData] = useState({
+    sport: athleteData.sport || '',
+    level: athleteData.level || '',
+    ageRange: athleteData.ageRange || ''
+  });
+
+  const [consents, setConsents] = useState({
+    usage: false,
+    processing: false,
+    safeguarding: false
+  });
+
+  const handleInfoChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleConsentChange = (e) => {
+    const { name, checked } = e.target;
+    setConsents(prev => ({
+      ...prev,
+      [name]: checked
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (Object.values(consents).every(Boolean)) {
+      updateAthleteData(formData);
+      onNext();
+    }
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      {/* Back Button */}
+      <div className="mb-8">
+        <button
+          onClick={() => navigate('/en/panel')}
+          className="text-[--color-sw-blue] hover:text-[--color-sw-red] flex items-center gap-2"
+        >
+          <span>←</span> Back to home
+        </button>
+      </div>
+
+      <div className="sw-card">
+        <form onSubmit={handleSubmit} className="space-y-8">
+          {/* About You Section */}
+<section>
+  <h2 className="text-2xl font-bold text-[--color-sw-blue] mb-4">
+    About You <span className="text-sm font-normal text-gray-500">(Optional)</span>
+  </h2>
+  <p className="text-gray-600 mb-6">
+    This information helps us understand your perspective better. You can choose
+    to remain anonymous when sharing your story.
+  </p>
+
+  {/* Name Input (Optional) */}
+  <div className="mb-6">
+    <label className="sw-label block mb-2">
+      Name <span className="text-gray-400">(Optional)</span>
+    </label>
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleInfoChange}
+      className="sw-input w-full"
+      placeholder="Enter your name"
+    />
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label className="sw-label block mb-2">
+        Sport <span className="text-gray-400">(Optional)</span>
+      </label>
+      <select
+        name="sport"
+        value={formData.sport}
+        onChange={handleInfoChange}
+        className="sw-input w-full"
+      >
+        <option value="">Select your sport</option>
+        {sports.map(sport => (
+          <option key={sport} value={sport}>{sport}</option>
+        ))}
+      </select>
+    </div>
+
+    <div>
+      <label className="sw-label block mb-2">
+        Competition Level <span className="text-gray-400">(Optional)</span>
+      </label>
+      <select
+        name="level"
+        value={formData.level}
+        onChange={handleInfoChange}
+        className="sw-input w-full"
+      >
+        <option value="">Select your level</option>
+        {levels.map(level => (
+          <option key={level} value={level}>{level}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <div className="mt-6">
+    <label className="sw-label block mb-2">
+      Age Range <span className="text-gray-400">(Optional)</span>
+    </label>
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+      {ageRanges.map(range => (
+        <label key={range} className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50">
+          <input
+            type="radio"
+            name="ageRange"
+            value={range}
+            checked={formData.ageRange === range}
+            onChange={handleInfoChange}
+            className="sw-checkbox"
+          />
+          <span>{range}</span>
+        </label>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+          {/* Privacy & Consent Section */}
+          <section className="pt-8 border-t">
+            <h2 className="text-2xl font-bold text-[--color-sw-blue] mb-4">
+              Privacy & Consent
+            </h2>
+            
+            {/* How We Use Information */}
+            <div className="sw-card bg-gray-50 mb-6">
+              <h3 className="font-bold text-lg mb-3">How we use your information</h3>
+              <p className="mb-4">
+                Sport Wales uses your information to help improve experiences for athletes. 
+                Sport Wales relies on your consent to process your information and will not 
+                use this information for any other purpose.
+              </p>
+              <Link 
+                to="https://www.sport.wales/privacy/"
+                target="_blank"
+                className="text-[--color-sw-blue] hover:text-[--color-sw-red] underline"
+              >
+                Learn more about how Sport Wales uses personal information →
+              </Link>
+            </div>
+
+            {/* Safeguarding Notice */}
+            <div className="sw-notice border-l-4 border-[--color-sw-yellow] mb-8">
+              <h3 className="font-bold text-lg mb-3">Safeguarding</h3>
+              <p className="mb-2">
+                These stories will be reviewed by the Panel supported by staff members at 
+                Sport Wales. They will be reviewed monthly.
+              </p>
+              <p className="font-medium">
+                If safeguarding concerns are disclosed, we may have a duty of care to share 
+                this with external organisations. We will discuss this with you to ensure 
+                you are fully informed and supported through this process.
+              </p>
+            </div>
+
+            {/* Consent Checkboxes */}
+            <div className="space-y-4 mb-8">
+              <label className="flex items-start space-x-3 p-2 rounded hover:bg-gray-50">
+                <input
+                  type="checkbox"
+                  name="usage"
+                  checked={consents.usage}
+                  onChange={handleConsentChange}
+                  className="sw-checkbox mt-1"
+                  required
+                />
+                <span>I agree for Sport Wales to use my information for the Athlete Panel to improve athlete experience.</span>
+              </label>
+
+              <label className="flex items-start space-x-3 p-2 rounded hover:bg-gray-50">
+                <input
+                  type="checkbox"
+                  name="processing"
+                  checked={consents.processing}
+                  onChange={handleConsentChange}
+                  className="sw-checkbox mt-1"
+                  required
+                />
+                <span>I understand how my information will be used and processed.</span>
+              </label>
+
+              <label className="flex items-start space-x-3 p-2 rounded hover:bg-gray-50">
+                <input
+                  type="checkbox"
+                  name="safeguarding"
+                  checked={consents.safeguarding}
+                  onChange={handleConsentChange}
+                  className="sw-checkbox mt-1"
+                  required
+                />
+                <span>I understand the safeguarding procedures and reporting obligations.</span>
+              </label>
+            </div>
+          </section>
+
+          {/* Submit Button */}
+          <div className="flex justify-end">
+            <button
+              type="submit"
+              disabled={!Object.values(consents).every(Boolean)}
+              className={`sw-button sw-button-primary px-8 py-3 text-lg ${
+                !Object.values(consents).every(Boolean) ? 'opacity-50 cursor-not-allowed' : ''
+              }`}
+            >
+              Continue to Share Your Story
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+--- End of AthleteInfoForm.jsx ---
+
+--- Start of StorySubmission.jsx ---
+// File location: src/components/engage/StorySubmission.jsx
+
+import React, { useState } from 'react';
+import { useAthleteContext } from '../../context/AthleteContext';
+
+const submissionTypes = [
+  { 
+    id: 'written-free', 
+    label: 'Journal Style', 
+    icon: '📝',
+    description: 'Write freely about your experience in your own way'
+  },
+  { 
+    id: 'written-guided', 
+    label: 'Guided Format', 
+    icon: '📋',
+    description: 'Answer guided questions about your experience'
+  },
+  { 
+    id: 'voice', 
+    label: 'Voice Recording', 
+    icon: '🎤',
+    description: 'Share your story in a casual conversation'
+  },
+  { 
+    id: 'video', 
+    label: 'Video Message', 
+    icon: '🎥',
+    description: 'Tell your story face-to-face'
+  }
+];
+
+const guidedQuestions = [
+  {
+    id: 'context',
+    label: 'Describe your exprience',
+    placeholder: 'Set the scene for your experience...'
+  },
+  {
+    id: 'feelings',
+    label: 'How did it make you feel?',
+    placeholder: 'Share your thoughts and feelings...'
+  },
+  {
+    id: 'challenges',
+    label: 'Any challenges?',
+    placeholder: 'What challenges did you face, if any?'
+  },
+  {
+    id: 'impact',
+    label: 'What happened afterwards?',
+    placeholder: 'Were there any results or outcomes?'
+  },
+  {
+    id: 'learning',
+    label: 'What did you learn?',
+    placeholder: 'Share any insights or learnings...'
+  },
+  {
+    id: 'feedback',
+    label: 'What would you like others to learn from this?',
+    placeholder: 'What should the panel, other athletes, NGBs, or Sport Wales take away from your experience?'
+  },
+  {
+    id: 'improvements',
+    label: 'Suggested improvements',
+    placeholder: 'If applicable, what changes could have made your experience better?'
+  }
+];
+
+export default function StorySubmission({ onNext, onBack }) {
+  const { athleteData, updateAthleteData } = useAthleteContext();
+  const [submissionType, setSubmissionType] = useState('written-free');
+  const [freeformStory, setFreeformStory] = useState('');
+  const [guidedStory, setGuidedStory] = useState(
+    Object.fromEntries(guidedQuestions.map(q => [q.id, '']))
+  );
+  const [file, setFile] = useState(null);
+  const [confirmNoNames, setConfirmNoNames] = useState(false);
+
+  const handleSubmissionTypeChange = (type) => {
+    setSubmissionType(type);
+    setFile(null);
+  };
+
+  const handleGuidedStoryChange = (id, value) => {
+    setGuidedStory(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const isValid = submissionType === 'voice' 
+        ? file.type.startsWith('audio/')
+        : file.type.startsWith('video/');
+      
+      if (isValid) {
+        setFile(file);
+      }
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const storyData = submissionType.startsWith('written') 
+      ? {
+          type: submissionType,
+          content: submissionType === 'written-free' 
+            ? freeformStory 
+            : guidedStory
+        }
+      : {
+          type: submissionType,
+          fileName: file?.name
+        };
+
+    updateAthleteData({ story: storyData });
+    onNext();
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold text-[--color-sw-blue] mb-3">
+          Share Your Story
+        </h2>
+        <p className="text-gray-600">
+          Choose how you'd like to share your experience with us. You can provide as much 
+          or as little information as you feel comfortable sharing.
+        </p>
+      </div>
+
+      {/* Submission Type Selection */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {submissionTypes.map(type => (
+          <button
+            key={type.id}
+            onClick={() => handleSubmissionTypeChange(type.id)}
+            className={`p-6 rounded-lg border-2 transition-all text-left
+              ${submissionType === type.id
+                ? 'border-[--color-sw-green]  bg-[--color-sw-green] bg-opacity-10 text-white'
+                : 'border-gray-200 hover:border-[--color-sw-blue] text-black'
+              }`}
+          >
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-2xl">{type.icon}</span>
+              <span className="font-bold">{type.label}</span>
+            </div>
+            <p className={`text-sm text-gray-6002 
+                ${submissionType === type.id
+                    ? 'text-white'
+                    :''
+                  }
+                `}>{type.description}</p>
+          </button>
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Written Story - Free Format */}
+        {submissionType === 'written-free' && (
+          <div className="space-y-4">
+            <label className="sw-label block">Your Story</label>
+            <div className="sw-card bg-gray-50">
+                <h3 className="font-bold mb-2">Story Prompts</h3>
+                <p>Please consider the following when sharing your story/experience with us. You can provide as much or as little information as you'd like.</p>
+                <ul className="list-disc pl-5 space-y-2 text-sm mt-3 pt-3 text-gray-600"> 
+                    <li>Describe the context</li>
+                    <li>What happened?</li>
+                    <li>How did it make you feel?</li>
+                    <li>Any challenges?</li>
+                    <li>Was there anything that happened afterwards as a result?</li>
+                    <li>What did you learn that you'd like to share?</li>
+                    <li>What would you like the panel, other athletes, NGBs, or Sport Wales to learn from this?</li>
+                    <li>If appropriate, are there any changes that could have made your experience better?</li>
+                </ul>
+                </div>
+
+            <textarea
+              value={freeformStory}
+              onChange={(e) => setFreeformStory(e.target.value)}
+              className="sw-input w-full h-80 min-h-80 resize-none p-2"
+              placeholder="Share your experience here... Remember not to include other people's names."
+            />
+          </div>
+        )}
+
+        {/* Written Story - Guided Format */}
+        {submissionType === 'written-guided' && (
+          <div className="space-y-6">
+            {guidedQuestions.map(question => (
+              <div key={question.id} className="space-y-2">
+                <label className="sw-label block">
+                  {question.label}
+                </label>
+                <textarea
+                  value={guidedStory[question.id]}
+                  onChange={(e) => handleGuidedStoryChange(question.id, e.target.value)}
+                  className="sw-input w-full h-32 resize-none p-3"
+                  placeholder={question.placeholder}
+                />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* File Upload for Voice/Video */}
+        {(submissionType === 'voice' || submissionType === 'video') && (
+          <div className="space-y-4">
+            <div className="sw-card bg-gray-50">
+              <h3 className="font-bold mb-2">
+                {submissionType === 'voice' ? 'Voice Recording' : 'Video Message'} Guidelines
+              </h3>
+              <ul className="list-disc pl-5 space-y-2 text-sm text-gray-600">
+                <li>Keep your {submissionType === 'voice' ? 'recording' : 'video'} under 10 minutes</li>
+                <li>Ensure clear audio quality</li>
+                <li>Remember not to mention other people's names</li>
+                <li>Supported formats: {submissionType === 'voice' 
+                  ? 'MP3, WAV, M4A' 
+                  : 'MP4, WebM, QuickTime'}</li>
+              </ul>
+            </div>
+
+            <div className="sw-card border-2 border-dashed border-gray-300 text-center p-8">
+              <input
+                type="file"
+                accept={submissionType === 'voice' 
+                  ? 'audio/mp3,audio/wav,audio/m4a' 
+                  : 'video/mp4,video/webm,video/quicktime'
+                }
+                onChange={handleFileChange}
+                className="hidden"
+                id="file-upload"
+              />
+              <label 
+                htmlFor="file-upload"
+                className="cursor-pointer text-[--color-sw-blue] hover:text-[--color-sw-red]"
+              >
+                <div className="text-3xl mb-2">
+                  {submissionType === 'voice' ? '🎤' : '🎥'}
+                </div>
+                <div className="font-bold mb-2">
+                  Click to upload your {submissionType === 'voice' ? 'recording' : 'video'}
+                </div>
+                <div className="text-sm text-gray-500">
+                  {file ? file.name : 'No file selected'}
+                </div>
+              </label>
+            </div>
+          </div>
+        )}
+
+        {/* Name Confirmation Checkbox */}
+        <label className="flex items-start space-x-3 p-2 rounded hover:bg-gray-50">
+          <input
+            type="checkbox"
+            checked={confirmNoNames}
+            onChange={(e) => setConfirmNoNames(e.target.checked)}
+            className="sw-checkbox mt-1"
+            required
+          />
+          <span className="text-sm">
+            I confirm my submission does not include other people's names
+          </span>
+        </label>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between pt-4">
+          <button
+            type="button"
+            onClick={onBack}
+            className="sw-button bg-gray-100 hover:bg-gray-200"
+          >
+            Back
+          </button>
+          <button
+            type="submit"
+            disabled={!confirmNoNames || (
+              submissionType.startsWith('written') 
+                ? submissionType === 'written-free' 
+                  ? !freeformStory
+                  : !Object.values(guidedStory).some(Boolean)
+                : !file
+            )}
+            className="sw-button sw-button-primary"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+--- End of StorySubmission.jsx ---
+
+--- Start of FinalSteps.jsx ---
+// File location: src/components/engage/FinalSteps.jsx
+
+import React, { useState } from 'react';
+import { useAthleteContext } from '../../context/AthleteContext';
+
+export default function FinalSteps({ onSubmit, onBack }) {
+  const { athleteData, updateAthleteData } = useAthleteContext();
+  const [preferences, setPreferences] = useState({
+    isAnonymous: false,
+    needsContact: false,
+    isSensitive: false
+  });
+
+  // Helper function to format story preview
+  const renderStoryPreview = () => {
+    const { story } = athleteData;
+    
+    if (!story) return null;
+
+    if (story.type === 'written-free') {
+      return (
+        <div className="prose max-w-none">
+          <p>{story.content}</p>
+        </div>
+      );
+    }
+
+    if (story.type === 'written-guided') {
+      return (
+        <div className="space-y-4">
+          {Object.entries(story.content).map(([key, value]) => 
+            value && (
+              <div key={key}>
+                <h4 className="font-medium text-[--color-sw-blue]">
+                  {key.charAt(0).toUpperCase() + key.slice(1)}
+                </h4>
+                <p>{value}</p>
+              </div>
+            )
+          )}
+        </div>
+      );
+    }
+
+    return (
+      <div className="flex items-center space-x-3 text-gray-600">
+        <span className="text-2xl">
+          {story.type === 'voice' ? '🎤' : '🎥'}
+        </span>
+        <span>{story.fileName}</span>
+      </div>
+    );
+  };
+
+  const handleChange = (e) => {
+    const { name, checked } = e.target;
+    setPreferences(prev => ({
+      ...prev,
+      [name]: checked
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    updateAthleteData(preferences);
+    onSubmit();
+  };
+
+  return (
+    <div className="max-w-4xl mx-auto space-y-8">
+      <div>
+        <h2 className="text-2xl font-bold text-[--color-sw-blue] mb-3">
+          Review Your Story
+        </h2>
+        <p className="text-gray-600">
+          Please review your story and choose your sharing preferences before submitting.
+        </p>
+      </div>
+
+      {/* Enlarged Story Preview Section */}
+      <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+        <h3 className="font-bold text-lg mb-4 text-[--color-sw-blue] flex items-center gap-2">
+          <span>Story Preview</span>
+          <span className="text-sm font-normal text-gray-500">
+            (Scroll to view full content)
+          </span>
+        </h3>
+        <div className="bg-white rounded-lg p-6 shadow-sm min-h-[300px] max-h-[400px] overflow-y-auto">
+          {renderStoryPreview()}
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Compact Preferences List */}
+        <div className="sw-card space-y-2">
+          <h3 className="font-bold text-lg mb-4 text-[--color-sw-blue]">
+            Sharing Preferences
+          </h3>
+          
+          <div className="space-y-3">
+            {/* Anonymous Option */}
+            <label className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded cursor-pointer">
+              <input
+                type="checkbox"
+                name="isAnonymous"
+                checked={preferences.isAnonymous}
+                onChange={handleChange}
+                className="sw-checkbox"
+              />
+              <div className="flex-1">
+                <span className="font-medium">Stay Anonymous</span>
+                <p className="text-sm text-gray-600 mt-1">
+                  Your story will be shared without your name or identifying details
+                </p>
+              </div>
+            </label>
+
+            {/* Contact Option */}
+            <label className="flex items-center space-x-3 p-2 hover:bg-gray-50 rounded cursor-pointer">
+              <input
+                type="checkbox"
+                name="needsContact"
+                checked={preferences.needsContact}
+                onChange={handleChange}
+                className="sw-checkbox"
+              />
+              <div className="flex-1">
+                <span className="font-medium">Request Panel Contact</span>
+                <p className="text-sm text-gray-600 mt-1">
+                  The Athlete Panel can contact you to discuss your story further
+                </p>
+              </div>
+            </label>
+
+            {/* Sensitive Content Warning */}
+            <label className="flex items-center space-x-3 p-2 bg-red-50 rounded cursor-pointer">
+              <input
+                type="checkbox"
+                name="isSensitive"
+                checked={preferences.isSensitive}
+                onChange={handleChange}
+                className="sw-checkbox"
+              />
+              <div className="flex-1">
+                <span className="font-medium text-[--color-sw-red]">
+                  Sensitive Content
+                </span>
+                <p className="text-sm text-gray-700 mt-1">
+                  Content that requires careful handling or raises safeguarding concerns
+                </p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        {/* Submission Notice */}
+        <div className="sw-notice bg-opacity-10 text-md py-4">
+          <p>
+            Your story will be reviewed by the Athlete Panel and relevant Sport Wales
+            staff. We'll handle your experiences with care and respect, using them to
+            improve athlete support across Wales.
+          </p>
+        </div>
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between pt-4">
+          <button
+            type="button"
+            onClick={onBack}
+            className="sw-button bg-gray-100 hover:bg-gray-200"
+          >
+            Back to Edit
+          </button>
+          <button 
+            type="submit" 
+            className="sw-button sw-button-primary px-8 py-3"
+          >
+            Submit Story
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+--- End of FinalSteps.jsx ---
+
+--- Start of context/AthleteContext.jsx ---
+// src/context/AthleteContext.jsx
+import React, { createContext, useState, useContext, useEffect } from 'react';
+
+const AthleteContext = createContext();
+
+export function AthleteProvider({ children }) {
+  const [athleteData, setAthleteData] = useState({
+    accessCode: '',
+    story: '',
+    sport: '',
+    level: '',
+    ageRange: '',
+    isAnonymous: false,
+    submissionType: 'written',
+    needsContact: false,
+    isSensitive: false
+  });
+
+  const updateAthleteData = (newData) => {
+    setAthleteData(prev => ({ ...prev, ...newData }));
+  };
+
+  useEffect(() => {
+    return () => {
+      // Cleanup function to reset data when component unmounts
+      setAthleteData({
+        accessCode: '',
+        story: '',
+        sport: '',
+        level: '',
+        ageRange: '',
+        isAnonymous: false,
+        submissionType: 'written',
+        needsContact: false,
+        isSensitive: false
+      });
+    };
+  }, []);
+
+  return (
+    <AthleteContext.Provider value={{ athleteData, updateAthleteData }}>
+      {children}
+    </AthleteContext.Provider>
+  );
+}
+
+export function useAthleteContext() {
+  return useContext(AthleteContext);
+}
+--- End of context/AthleteContext.jsx ---
+
