@@ -89,9 +89,8 @@ npm run dev
 athletes-voice/
 ├── src/
 │   ├── components/     
-│   │   ├── engage/            # Story submission components
-│   │   ├── shared/            # Shared components
-│   │   └── ui/                # UI components
+│   │   ├── engage/           # Story submission components
+│   │   └── ui/               # UI components
 │   ├── context/              # AthleteContext
 │   ├── pages/                # Main page components
 │   │   ├── EnterPage.jsx     # Welcome & access
