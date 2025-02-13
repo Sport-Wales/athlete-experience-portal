@@ -284,13 +284,7 @@ export default function StorySubmission({ onNext, onBack }) {
           </button>
           <button
             type="submit"
-            disabled={!confirmNoNames || (
-              submissionType.startsWith('written') 
-                ? submissionType === 'written-free' 
-                  ? !freeformStory
-                  : !Object.values(guidedStory).some(Boolean)
-                : !file
-            )}
+            disabled={!confirmNoNames}
             className="sw-button sw-button-primary"
           >
             Continue
