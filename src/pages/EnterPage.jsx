@@ -238,6 +238,134 @@
 
 
 
+// // src/pages/EnterPage.jsx
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { Info, Shield, Users } from 'lucide-react';
+
+// export default function EnterPage() {
+//   const [code, setCode] = useState('');
+//   const [error, setError] = useState('');
+//   const [isLoading, setIsLoading] = useState(false);
+//   const navigate = useNavigate();
+    
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setIsLoading(true);
+//     setError('');
+  
+//     // For prototype, accept any code
+//     if (code.trim().length > 0) {
+//       // Simulate a brief loading state
+//       await new Promise(resolve => setTimeout(resolve, 600));
+//       navigate('/en/panel');
+//     } else {
+//       setError('Please enter the access code provided to you');
+//     }
+//     setIsLoading(false);
+//   };
+
+//   return (
+//     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-12">
+//       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+//         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+//           {/* Left Column - Welcome & Purpose */}
+//           <div className="space-y-6">
+//             <header>
+//               <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
+//                 Welcome to the Athlete's Voice
+//               </h1>
+//               <p className="text-lg text-gray-600">
+//                 A space for all athletes to share their experiences and make a positive impact
+//                 on Welsh sport.
+//               </p>
+//             </header>
+
+//             {/* Purpose Section - New */}
+//             <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-blue]">
+//               <h2 className="text-xl font-bold text-[--color-sw-blue] mb-3">What is the Athlete's Voice?</h2>
+//               <p className="text-gray-700 mb-4">
+//                 The Athlete's Voice is a digital platform for athletes to share their stories from their sports to provide athlete insight that will help inform Sport Wales work. 
+//               </p>
+//               <p className="text-gray-700">
+//                 Your stories will be used to share examples of best practice, and collated to identify common themes and areas for improvement. Sport Wales can then influence work within NGBs to improve environments and enhance athlete experiences within the Welsh system.
+//               </p>
+//             </div>
+
+//             {/* Who Sees Your Stories - New */}
+//             <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-green]">
+//               <h2 className="text-xl font-bold text-[--color-sw-green] mb-3">Your Privacy Matters</h2>
+//               <div className="flex items-start space-x-4 mb-3">
+//                 <Shield className="h-6 w-6 text-[--color-sw-green] mt-1 flex-shrink-0" />
+//                 <p className="text-gray-700">
+//                   Your stories will be seen by the staff members behind the Sport Wales Athlete Panel, who will collate them to identify themes and present findings to inform project delivery.
+//                 </p>
+//               </div>
+//               <p className="text-gray-700 text-sm italic">
+//                 Full details about who can access your stories and how they'll be used are provided inside the portal.
+//               </p>
+//             </div>
+//           </div>
+
+//           {/* Right Column - Access Form */}
+//           <div className="flex flex-col items-center justify-center space-y-8">
+//             <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border-t-4 border-[--color-sw-red]">
+//               <h2 className="text-xl font-bold text-[--color-sw-blue] mb-6 text-center">Enter the Portal</h2>
+              
+//               <form onSubmit={handleSubmit} className="space-y-6">
+//                 <div>
+//                   <label className="sw-label block mb-2">
+//                     Enter your access code
+//                   </label>
+//                   <input
+//                     type="text"
+//                     className="sw-input w-full"
+//                     value={code}
+//                     onChange={(e) => setCode(e.target.value)}
+//                     placeholder="Enter access code"
+//                   />
+//                   <p className="mt-2 text-sm text-gray-500">
+//                     Your access code was provided to you by Sport Wales.
+//                   </p>
+//                 </div>
+                
+//                 {error && (
+//                   <div className="sw-notice text-[--color-sw-red]">
+//                     {error}
+//                   </div>
+//                 )}
+                
+//                 <button 
+//                   type="submit" 
+//                   className="sw-button sw-button-primary w-full py-3 text-lg font-bold"
+//                   disabled={isLoading}
+//                 >
+//                   {isLoading ? 'Verifying...' : 'Continue to Portal'}
+//                 </button>
+//               </form>
+//             </div>
+
+//             {/* What We Want to Achieve - New */}
+//             <div className="bg-[--color-sw-blue]/5 rounded-lg p-6 w-full max-w-md">
+//               <div className="flex items-start space-x-4">
+//                 <Users className="h-6 w-6 text-[--color-sw-blue] mt-1 flex-shrink-0" />
+//                 <div>
+//                   <h2 className="text-lg font-bold text-[--color-sw-blue] mb-2">What we want to achieve</h2>
+//                   <p className="text-gray-700">
+//                     We want athletes' voices to be heard, and for their experiences to be used as insight to inform the work at Sport Wales, to help us deliver an athlete-centred approach and build more positive experiences within sport.
+//                   </p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
 // src/pages/EnterPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -268,96 +396,100 @@ export default function EnterPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Welcome & Purpose */}
-          <div className="space-y-6">
-            <header>
-              <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
-                Welcome to the Athlete's Voice
-              </h1>
-              <p className="text-lg text-gray-600">
-                A space for all athletes to share their experiences and make a positive impact
-                on Welsh sport.
-              </p>
-            </header>
+        {/* Welcome Header - Stacked at top */}
+        <div className="text-center mb-12">
+          <h1 className="sw-heading-primary text-[--color-sw-blue] mb-4">
+            Welcome to the Athlete's Voice
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            A space for all athletes to share their experiences and make a positive impact
+            on Welsh sport.
+          </p>
+        </div>
 
-            {/* Purpose Section - New */}
-            <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-blue]">
-              <h2 className="text-xl font-bold text-[--color-sw-blue] mb-3">What is the Athlete's Voice?</h2>
-              <p className="text-gray-700 mb-4">
-                The Athlete's Voice is a digital platform for athletes to share their stories from their sports to provide athlete insight that will help inform Sport Wales work. 
-              </p>
-              <p className="text-gray-700">
-                Your stories will be used to share examples of best practice, and collated to identify common themes and areas for improvement. Sport Wales can then influence work within NGBs to improve environments and enhance athlete experiences within the Welsh system.
-              </p>
-            </div>
-
-            {/* Who Sees Your Stories - New */}
-            <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-green]">
-              <h2 className="text-xl font-bold text-[--color-sw-green] mb-3">Your Privacy Matters</h2>
-              <div className="flex items-start space-x-4 mb-3">
-                <Shield className="h-6 w-6 text-[--color-sw-green] mt-1 flex-shrink-0" />
-                <p className="text-gray-700">
-                  Your stories will be seen by the staff members behind the Sport Wales Athlete Panel, who will collate them to identify themes and present findings to inform project delivery.
+        {/* Access Form - Centered */}
+        <div className="flex justify-center mb-16">
+          <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border-t-4 border-[--color-sw-red]">
+            <h2 className="text-xl font-bold text-[--color-sw-blue] mb-6 text-center">Enter the Portal</h2>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="sw-label block mb-2">
+                  Enter your access code
+                </label>
+                <input
+                  type="text"
+                  className="sw-input w-full"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  placeholder="Enter access code"
+                />
+                <p className="mt-2 text-sm text-gray-500">
+                  Your access code was provided to you by Sport Wales.
                 </p>
               </div>
-              <p className="text-gray-700 text-sm italic">
-                Full details about who can access your stories and how they'll be used are provided inside the portal.
-              </p>
-            </div>
+              
+              {error && (
+                <div className="sw-notice text-[--color-sw-red]">
+                  {error}
+                </div>
+              )}
+              
+              <button 
+                type="submit" 
+                className="sw-button sw-button-primary w-full py-3 text-lg font-bold"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Verifying...' : 'Continue to Portal'}
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Information Sections - Flex grid at bottom */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Purpose Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-blue]">
+            <h2 className="text-xl font-bold text-[--color-sw-blue] mb-3">What is the Athlete's Voice?</h2>
+            <p className="text-gray-700 mb-4">
+              The Athlete's Voice is a digital platform for athletes to share their stories from their sports to provide athlete insight that will help inform Sport Wales work. 
+            </p>
+            <p className="text-gray-700">
+              Your stories will be used to share examples of best practice, and collated to identify common themes and areas for improvement. Sport Wales can then influence work within NGBs to improve environments and enhance athlete experiences within the Welsh system.
+            </p>
           </div>
 
-          {/* Right Column - Access Form */}
-          <div className="flex flex-col items-center justify-center space-y-8">
-            <div className="bg-white rounded-lg shadow-lg p-8 w-full max-w-md border-t-4 border-[--color-sw-red]">
-              <h2 className="text-xl font-bold text-[--color-sw-blue] mb-6 text-center">Enter the Portal</h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="sw-label block mb-2">
-                    Enter your access code
-                  </label>
-                  <input
-                    type="text"
-                    className="sw-input w-full"
-                    value={code}
-                    onChange={(e) => setCode(e.target.value)}
-                    placeholder="Enter access code"
-                  />
-                  <p className="mt-2 text-sm text-gray-500">
-                    Your access code was provided to you by Sport Wales.
-                  </p>
-                </div>
-                
-                {error && (
-                  <div className="sw-notice text-[--color-sw-red]">
-                    {error}
-                  </div>
-                )}
-                
-                <button 
-                  type="submit" 
-                  className="sw-button sw-button-primary w-full py-3 text-lg font-bold"
-                  disabled={isLoading}
-                >
-                  {isLoading ? 'Verifying...' : 'Continue to Portal'}
-                </button>
-              </form>
-            </div>
-
-            {/* What We Want to Achieve - New */}
-            <div className="bg-[--color-sw-blue]/5 rounded-lg p-6 w-full max-w-md">
-              <div className="flex items-start space-x-4">
-                <Users className="h-6 w-6 text-[--color-sw-blue] mt-1 flex-shrink-0" />
-                <div>
-                  <h2 className="text-lg font-bold text-[--color-sw-blue] mb-2">What we want to achieve</h2>
-                  <p className="text-gray-700">
-                    We want athletes' voices to be heard, and for their experiences to be used as insight to inform the work at Sport Wales, to help us deliver an athlete-centred approach and build more positive experiences within sport.
-                  </p>
-                </div>
+           {/* What We Want to Achieve Section */}
+           <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-green]">
+            <h2 className="text-xl font-bold text-[--color-sw-blue] mb-3">What we want to achieve</h2>
+            <div className="flex items-start space-x-4 mb-3">
+              <Users className="h-6 w-6 text-[--color-sw-green] mt-1 flex-shrink-0" />
+              <div>
+                <p className="text-gray-700">
+                  We want athletes' voices to be heard, and for their experiences to be used as insight to inform the work at Sport Wales, to help us deliver an athlete-centred approach and build more positive experiences within sport.
+                </p>
               </div>
             </div>
+            <p className="text-gray-700 text-sm mt-2">
+              The portal is also a neutral space where athletes may share experiences they feel uncomfortable discussing with their NGB.
+            </p>
           </div>
+
+          {/* Privacy Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6 border-l-4 border-[--color-sw-yellow]">
+            <h2 className="text-xl font-bold text-[--color-sw-blue] mb-3">Your Privacy Matters</h2>
+            <div className="flex items-start space-x-4 mb-3">
+              <Shield className="h-6 w-6 text-[--color-sw-yellow] mt-1 flex-shrink-0" />
+              <p className="text-gray-700">
+                Your stories will be seen by the staff members behind the Sport Wales Athlete Panel, who will collate them to identify themes and present findings to inform project delivery.
+              </p>
+            </div>
+            <p className="text-gray-700 text-sm italic">
+              Full details about who can access your stories and how they'll be used are provided inside the portal.
+            </p>
+          </div>
+
+         
         </div>
       </div>
     </div>
